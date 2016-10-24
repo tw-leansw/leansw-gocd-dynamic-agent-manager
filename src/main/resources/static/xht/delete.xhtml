@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="#">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="delModalLabel">Delete Job</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <h4>Are You Sure to Delete This Job:</h4>
+                        <div class="row">
+                            <div class="col-md-4">name:</div>
+                            <div class="col-md-8">{{name}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">group:</div>
+                            <div class="col-md-8">{{group}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">cron:</div>
+                            <div class="col-md-8">{{cron}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">type:</div>
+                            <div class="col-md-8">{{type}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">dataMap:</div>
+                            <div class="col-md-8">
+                                {{{dataMap}}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="name" value="{{name}}" />
+                    <input type="hidden" name="group" value="{{group}}" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="job-del-confirm" type="button" class="btn btn-primary">Apply</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

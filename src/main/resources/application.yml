@@ -11,6 +11,11 @@ spring:
       repositories:
         enabled: true
 
+rancher:
+  uri: http://rancher-server:8080
+  accessSecret: _some_access_key_
+  secretKey: _some_secret_key_
+
 gocd:
   uri: http://gocd-server:8153/go
   username: admin
@@ -23,10 +28,14 @@ gocd:
     maxInstances: 99
     scaleStep: 1
 
-rancher:
-  uri: http://rancher-server:8080
-  accessSecret: _some_access_key_
-  secretKey: _some_secret_key_
+eureka:
+  enabled: true
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    preferIpAddress: true
+
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 30000
 ribbon:

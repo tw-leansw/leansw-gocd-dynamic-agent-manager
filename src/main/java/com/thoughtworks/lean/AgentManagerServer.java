@@ -1,4 +1,4 @@
-package com.thoughtworks.lean.gocd.agentManager;
+package com.thoughtworks.lean;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
