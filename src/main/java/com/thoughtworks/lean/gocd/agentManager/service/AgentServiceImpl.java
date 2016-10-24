@@ -86,6 +86,9 @@ public class AgentServiceImpl implements AgentService {
 
 
     AgentInfo getAgentsByContainerId(List<AgentInfo> agentInfos, String containerId) {
+        if (containerId == null) {
+            return null;
+        }
         for (AgentInfo agentInfo : agentInfos) {
             if (containerId.startsWith(agentInfo.getHostname())) {
                 return agentInfo;
@@ -132,8 +135,8 @@ public class AgentServiceImpl implements AgentService {
     @Override
     public AgentConfig updateConfig(AgentConfig config) {
         AgentConfig configInDB = configRepository.findByName(config.getName());
-        BeanUtils.copyProperties(config, configInDB, "id", "name");
-        return configRepository.save(config);
+        BeanUtils.copyProperties(config, configInDB, "id", "name", "projectName");
+        return configRepository.save(configInDB);
     }
 
     public AgentServiceImpl setRancherClient(RancherClient rancherClient) {

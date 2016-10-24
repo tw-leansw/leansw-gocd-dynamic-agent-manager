@@ -18,7 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 
 @RestController
-@RequestMapping(path = {"/api/agent/"})
+@RequestMapping(path = {"/api/gocd-agent/"})
 public class AgentController {
 
     @Autowired

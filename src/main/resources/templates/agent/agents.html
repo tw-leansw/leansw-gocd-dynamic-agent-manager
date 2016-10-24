@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head th:include="layout :: head">
+
+</head>
+<body>
+<div th:include="layout :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td>service-name</td>
+                    <td>resources</td>
+                    <td>scale</td>
+                    <td>idle</td>
+                    <td>action</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="agent : ${agents}" class="agent-item">
+                    <td th:text="${agent.serviceName}" class="agent-service-name">service-name</td>
+                    <td th:text="${agent.resources}" class="resources">agent-resources</td>
+                    <td th:text="${agent.serviceInfo.scale}" class="agent-scale">agent-resources</td>
+                    <td th:text="${agent.idle}" class="agent-idle">agent-resources</td>
+                    <td>
+                        <button type="button"
+                                class="btn btn-default agent-scale-up" th:classappend="${agent.config.autoConfig} ? 'disabled': '' ">
+
+                            <span class="fa fa-plus"></span>
+                        </button>
+                        <button type="button"
+                                class="btn btn-default agent-scale-down" th:classappend="${agent.config.autoConfig} ? 'disabled': ''">
+                            <span class="fa fa-minus"></span>
+                        </button>
+                        <button type="button"
+                                class="btn btn-info agent-setting">
+                            <span class="fa fa-gear"></span>
+                        </button>
+                        <input type="hidden" class="agent-id" th:value="${agent.config.id}" />
+                        <input type="hidden" class="agent-name" th:value="${agent.config.name}" />
+                        <input type="hidden" class="agent-max-instances" th:value="${agent.config.maxInstances}" />
+                        <input type="hidden" class="agent-min-idles" th:value="${agent.config.minIdles}" />
+                        <input type="hidden" class="agent-auto-config" th:value="${agent.config.autoConfig}" />
+                        <input type="hidden" class="agent-scale-step" th:value="${agent.config.scaleStep}" />
+                        <input type="hidden" class="agent-resources" th:value="${#strings.listJoin(agent.config.resources,',')}" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalContainder">
+</div>
+
+<script type="text/javascript" th:src="@{/js/agents.js}"></script>
+
+
+</body>
+</html>
+
+

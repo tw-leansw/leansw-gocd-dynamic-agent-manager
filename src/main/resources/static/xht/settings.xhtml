@@ -1,0 +1,63 @@
+<!-- Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="settingsModalLabel">Agent Settings</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row form-group">
+                        <div class="col-md-4"><label>name:</label></div>
+                        <div class="col-md-8">
+                            {{name}}
+                        </div>
+                    </div>
+                    <div class="row  form-group">
+                        <div class="col-md-4"><label for="edit-min-idles">minIdles:</label></div>
+                        <div class="col-md-8"><input class="form-control" id="edit-min-idles" type="number" name="minIdles"
+                                                     value="{{minIdles}}"> </input></div>
+                    </div>
+
+                    <div class="row  form-group">
+                        <div class="col-md-4"><label for="edit-max-instances">maxInstances:</label></div>
+                        <div class="col-md-8"><input class="form-control" id="edit-max-instances" type="number" name="maxInstances"
+                                                     value="{{maxInstances}}"> </input></div>
+                    </div>
+
+                    <div class="row  form-group">
+                        <div class="col-md-4"><label for="edit-max-instances">scaleStep:</label></div>
+                        <div class="col-md-8"><input class="form-control" id="edit-scale-step" type="number" name="scaleStep"
+                                                     value="{{scaleStep}}"> </input></div>
+                    </div>
+
+                    <div class="row  form-group">
+                        <div class="col-md-4"><label for="edit-resources">scaleStep:</label></div>
+                        <div class="col-md-8"><input class="form-control" id="edit-resources" type="text" name="resources"
+                                                     value="{{resources}}"> </input></div>
+                    </div>
+
+
+                    <div class="row  form-group">
+                        <div class="col-md-4"><label for="edit-auto-config">autoConfig:</label></div>
+                        <div class="col-md-8">
+                            <input class="form-control" id="edit-auto-config" type="checkbox" name="autoConfig">
+                            </input>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" name="name" value="{{name}}"> </input>
+                <input type="hidden" name="id" value="{{id}}"> </input>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="agent-settings-confirm">Apply</button>
+            </div>
+        </div>
+
+    </div>
+</div>
