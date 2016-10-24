@@ -110,7 +110,18 @@ public class AgentServiceImpl implements AgentService {
     @Override
     @Transactional
     public AgentConfig getConfigByName(String serviceName) {
-        return configRepository.findByName(serviceName);
+        AgentConfig retAgentConfig = configRepository.findByName(serviceName);
+        if (retAgentConfig == null) {
+            retAgentConfig = new AgentConfig().setAutoConfig(false)
+                    .setName(serviceName)
+                    .setMaxInstances(getAgentManagerConfig().getMaxInstances())
+                    .setMinIdles(getAgentManagerConfig().getMinIdles())
+                    .setScaleStep(getAgentManagerConfig().getScaleStep())
+                    .setId(System.currentTimeMillis())
+                    .setProjectName(getAgentManagerConfig().getAgentStack());
+            configRepository.save(retAgentConfig);
+        }
+        return retAgentConfig;
     }
 
     @Override

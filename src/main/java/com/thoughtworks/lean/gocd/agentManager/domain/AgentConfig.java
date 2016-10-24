@@ -26,7 +26,7 @@ public class AgentConfig {
 
     private String projectName;
 
-    protected AgentConfig() {
+    public AgentConfig() {
     }
 
     public AgentConfig(String name, int minIdele, int scaleStep, int maxInstances, boolean autoConfig, String projectName) {

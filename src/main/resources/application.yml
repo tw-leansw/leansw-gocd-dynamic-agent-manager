@@ -23,7 +23,7 @@ gocd:
   agentManager:
     agentEnvironment: Default
     agentStack: leansw-go-agents
-    managedServiceResource: dind, dynamic-managed-agent
+    managedServiceResource: dynamic-manage-agent
     minIdles: 1
     maxInstances: 99
     scaleStep: 1
