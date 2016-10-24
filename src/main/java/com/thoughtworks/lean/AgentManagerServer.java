@@ -17,10 +17,8 @@ import java.io.IOException;
 @EnableCaching
 @SpringBootApplication
 @Configuration
-@EnableFeignClients
 @EnableAspectJAutoProxy
 @ComponentScan
-
 @Controller
 public class AgentManagerServer {
     @RequestMapping("/")
