@@ -6,11 +6,10 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://192.168.99.1:27017
+      uri: mongodb://192.168.99.1:27017/deliflow-gocd-agent-manager
     mongo:
       repositories:
         enabled: true
-
 
 gocd:
   uri: http://gocd-server:8153/go
