@@ -1,0 +1,36 @@
+debug: true
+
+server:
+  port: 9096
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://192.168.99.1:27017
+    mongo:
+      repositories:
+        enabled: true
+
+
+gocd:
+  uri: http://gocd-server:8153/go
+  username: admin
+  password: badger
+  agentManager:
+    agentEnvironment: Default
+    agentStack: rancher-gocd-agents
+    managedServiceResource: dynamic-managed-agent
+    minIdles: 1
+    maxInstances: 99
+    scaleStep: 1
+
+rancher:
+  uri: http://rancher-server:8080
+  accessSecret: _some_access_key_
+  secretKey: _some_secret_key_
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 30000
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 60000
+

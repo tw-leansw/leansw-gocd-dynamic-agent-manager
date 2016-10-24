@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: gocd-dynamic-agent-manager
+encrypt:
+  failOnError: false
