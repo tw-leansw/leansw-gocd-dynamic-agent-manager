@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongo-server:27017/deliflow-gocd-agent-manager-docker
+
+
+
