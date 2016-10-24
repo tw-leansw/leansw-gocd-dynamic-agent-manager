@@ -4,7 +4,7 @@ VOLUME /tmp
 COPY lib /lean/java/lib
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT sh /entrypoint.sh
-ADD leansw-gocd-dynamic-agent-manager-*-SNAPSHOT.jar /leansw-gocd-dynamic-agent-manager.jar
-RUN touch /leansw-gocd-dynamic-agent-manager.jar && \
+ADD gocd-dynamic-agent-manager-*-SNAPSHOT.jar /gocd-dynamic-agent-manager.jar
+RUN touch /gocd-dynamic-agent-manager.jar && \
     touch /lean/java/lib/*.jar && \
     chmod +x /entrypoint.sh
