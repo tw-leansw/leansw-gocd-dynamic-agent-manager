@@ -58,9 +58,13 @@ public class AgentServiceInfo {
 
     public Set<String> getResources() {
         Set<String> resources = new HashSet<>();
-        resources.add(agentManagerConfig.getManagedServiceResource());
+        if (agentManagerConfig != null) {
+            resources.add(agentManagerConfig.getManagedServiceResource());
+        }
         resources.add(getServiceResourceTag());
-        resources.addAll(config.getResources());
+        if (config != null) {
+            resources.addAll(config.getResources());
+        }
         return resources;
     }
 
@@ -133,7 +137,7 @@ public class AgentServiceInfo {
     }
 
     public String getServiceResourceTag() {
-        return "rancher-" + this.config.getProjectName() + "-" + this.getServiceName();
+        return "rancher-" + (this.config == null ? "Unknown" : this.config.getProjectName()) + "-" + this.getServiceName();
     }
 
     public boolean isAllAgentAvailable() {

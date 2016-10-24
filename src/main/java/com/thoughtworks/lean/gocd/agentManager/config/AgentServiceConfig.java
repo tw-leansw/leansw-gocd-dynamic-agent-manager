@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Lazy;
 @Configuration
 public class AgentServiceConfig {
 
+    public static int MANAGER_CONFIG_DEFAULT_ID = 1;
+
+
     @Value("${gocd.agentManager.agentEnvironment}")
     private String agentEnvironment;
     @Value("${gocd.agentManager.agentStack}")
@@ -25,14 +28,14 @@ public class AgentServiceConfig {
     @Lazy
     @Qualifier("agentService")
     public AgentServiceImpl configAgentService() {
-        AgentManagerConfig agentManagerConfig = managerConfigRepository.findOneById(1);
+        AgentManagerConfig agentManagerConfig = managerConfigRepository.findOneById(MANAGER_CONFIG_DEFAULT_ID);
         AgentServiceImpl agentService = new AgentServiceImpl();
-        if (agentManagerConfig != null) {
-            agentService.setAgentEnvironment(agentManagerConfig.getAgentEnvironment());
-            agentService.setAgentStack(agentManagerConfig.getAgentStack());
-        } else {
-            agentService.setAgentEnvironment(agentEnvironment);
-            agentService.setAgentStack(agentStack);
+        if (agentManagerConfig == null) {
+            agentManagerConfig = new AgentManagerConfig();
+            agentManagerConfig.setId(MANAGER_CONFIG_DEFAULT_ID);
+            agentManagerConfig.setAgentEnvironment(agentEnvironment);
+            agentManagerConfig.setAgentStack(agentStack);
+            managerConfigRepository.save(agentManagerConfig);
         }
         return agentService;
     }

@@ -23,16 +23,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.thoughtworks.lean.gocd.agentManager.config.AgentServiceConfig.MANAGER_CONFIG_DEFAULT_ID;
+
 public class AgentServiceImpl implements AgentService {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
-    private static int MANAGER_CONFIG_DEFAULT_ID = 1;
     private static int AGENT_RESTART_RETRY = 3;
     private static long INSTANCE_STATUS_CHECK_INTERVAL = 5000;
     private static long AGENT_START_TIME_OUT = 30000;
-    private String agentEnvironment;
-
-    private String agentStack;
 
 
     ThreadPoolTaskExecutor taskExecutor;
@@ -79,6 +77,7 @@ public class AgentServiceImpl implements AgentService {
         AgentServiceInfo agentServiceInfo = new AgentServiceInfo();
         agentServiceInfo.setServiceName(serviceInfo.getName());
         agentServiceInfo.setServiceInfo(serviceInfo);
+        agentServiceInfo.setAgentManagerConfig(getAgentManagerConfig());
         agentServiceInfo.setConfig(getConfigByName(serviceInfo.getName()));
         agentServiceInfo.setCompositeAgentInfos(getCompositeAgentInfos(serviceInfo));
         agentServiceInfo.setAgentManagerConfig(managerConfigRepository.findOneById(MANAGER_CONFIG_DEFAULT_ID));
@@ -142,22 +141,14 @@ public class AgentServiceImpl implements AgentService {
     }
 
     public String getAgentEnvironment() {
-        return agentEnvironment;
+        return getAgentManagerConfig().getAgentEnvironment();
     }
 
-    public AgentServiceImpl setAgentEnvironment(String agentEnvironment) {
-        this.agentEnvironment = agentEnvironment;
-        return this;
-    }
 
     public String getAgentStack() {
-        return agentStack;
+        return getAgentManagerConfig().getAgentStack();
     }
 
-    public AgentServiceImpl setAgentStack(String agentStack) {
-        this.agentStack = agentStack;
-        return this;
-    }
 
     public AgentServiceImpl setManagerConfigRepository(AgentManagerConfigRepository managerConfigRepository) {
         this.managerConfigRepository = managerConfigRepository;
@@ -207,9 +198,6 @@ public class AgentServiceImpl implements AgentService {
             LOG.error("Can not get Agent Services from Rancher, Maybe Environment or Stack is wrong. configEnv: " + config.getAgentEnvironment() + " configStack: " + config.getAgentStack());
             throw new ServiceErrorException("Can not get Agent Services from Rancher. Due to: " + e.getMessage());
         }
-
-        this.setAgentEnvironment(config.getAgentEnvironment());
-        this.setAgentStack(config.getAgentStack());
         // TODO minIdles / scaleStep / maxInstances are not changed.
         BeanUtils.copyProperties(config, configInDB, "id", "name ");
         configInDB.setId(MANAGER_CONFIG_DEFAULT_ID);
@@ -394,7 +382,7 @@ public class AgentServiceImpl implements AgentService {
     public void autoScaleGoCDAgent() {
         for (AgentServiceInfo agentServiceInfo : getAgentServices()) {
             //skip not auto scaled agent
-            if(!agentServiceInfo.getConfig().isAutoConfig()){
+            if (!agentServiceInfo.getConfig().isAutoConfig()) {
                 continue;
             }
 

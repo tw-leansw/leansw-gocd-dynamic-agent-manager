@@ -3,6 +3,7 @@ package com.thoughtworks.lean.gocd.agentManager.domain;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -94,7 +95,7 @@ public class AgentConfig {
     }
 
     public Set<String> getResources() {
-        return resources;
+        return resources == null ? Collections.emptySet() : resources;
     }
 
     public AgentConfig setResources(Set<String> resources) {

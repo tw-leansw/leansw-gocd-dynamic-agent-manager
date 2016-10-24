@@ -22,8 +22,8 @@ gocd:
   password: badger
   agentManager:
     agentEnvironment: Default
-    agentStack: rancher-gocd-agents
-    managedServiceResource: dynamic-managed-agent
+    agentStack: leansw-go-agents
+    managedServiceResource: dind, dynamic-managed-agent
     minIdles: 1
     maxInstances: 99
     scaleStep: 1
