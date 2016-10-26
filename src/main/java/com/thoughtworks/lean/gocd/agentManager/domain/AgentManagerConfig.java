@@ -99,16 +99,32 @@ public class AgentManagerConfig {
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         AgentManagerConfig that = (AgentManagerConfig) o;
-        return Objects.equal(agentStack, that.agentStack) &&
-                Objects.equal(agentEnvironment, that.agentEnvironment) &&
-                Objects.equal(managedServiceResource, that.managedServiceResource);
+
+        if (id != that.id) return false;
+        if (minIdles != that.minIdles) return false;
+        if (maxInstances != that.maxInstances) return false;
+        if (scaleStep != that.scaleStep) return false;
+        if (agentStack != null ? !agentStack.equals(that.agentStack) : that.agentStack != null) return false;
+        if (agentEnvironment != null ? !agentEnvironment.equals(that.agentEnvironment) : that.agentEnvironment != null)
+            return false;
+        return managedServiceResource != null ? managedServiceResource.equals(that.managedServiceResource) : that.managedServiceResource == null;
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(agentStack, agentEnvironment, managedServiceResource);
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + minIdles;
+        result = 31 * result + maxInstances;
+        result = 31 * result + scaleStep;
+        result = 31 * result + (agentStack != null ? agentStack.hashCode() : 0);
+        result = 31 * result + (agentEnvironment != null ? agentEnvironment.hashCode() : 0);
+        result = 31 * result + (managedServiceResource != null ? managedServiceResource.hashCode() : 0);
+        return result;
     }
 }

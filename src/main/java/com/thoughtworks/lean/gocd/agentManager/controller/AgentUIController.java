@@ -22,7 +22,14 @@ public class AgentUIController {
     }
 
     @RequestMapping("list")
-    public ModelAndView allJobs() {
+    public ModelAndView list() {
         return new ModelAndView("agent/agents", "agents", agentService.getAgentServices());
     }
+
+
+    @RequestMapping("env")
+    public ModelAndView env() {
+        return new ModelAndView("agent/env", "env", agentService.getAgentManagerConfig());
+    }
+
 }

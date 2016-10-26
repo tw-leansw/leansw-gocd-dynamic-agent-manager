@@ -225,6 +225,7 @@ public class AgentServiceImpl implements AgentService {
                     configInDB.getMaxInstances(),
                     false,
                     config.getAgentEnvironment());
+            agentConfig.setId(System.currentTimeMillis());
             agentConfig.addResource(config.getManagedServiceResource());
             configRepository.save(agentConfig);
         }
@@ -325,7 +326,7 @@ public class AgentServiceImpl implements AgentService {
             while (true);
         }
         // change scale
-        int scaleChange = Math.max(
+        int scaleChange = Math.min(
                 agentServiceInfo.getMaxInstances() - agentServiceInfo.getScale(),
                 agentServiceInfo.getScaleStep() - scaleCount);
         if (scaleChange > 0) {
